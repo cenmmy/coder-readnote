@@ -504,6 +504,37 @@ Author: cenmmy <2282805045@qq.com>
 Date:   Fri Jan 1 15:42:07 2021 +0800
 
     新增CMake菜谱读书笔记
-
 ```
+
+### 4. 撤销操作
+
+#### 4.1 撤销提交`git commit --amend`
+
+`amend`的中文意思是修订。
+
+```shell
+$ git commit -m 'initial commit'
+$ git add forgotten_file
+$ git commit --amend
+```
+
+当我们在一次提交时将提交信息写错或忘记添加某几个文件时，可以运行这条命令来修改提交信息，这样不会新增一个提交，而是直接修改上一次提交的信息。
+
+#### 4.2 取消暂存的文件`git reset HEAD <file>`
+
+```shell
+$ git reset HEAD CONTRIBUTING.md
+```
+
+将暂存区中的文件修改为未暂存的状态。
+
+#### 4.3 撤销对文件的修改`git checkout -- <file>`
+
+撤销对文件的修改，将该文件还原成为上次提交的样子。
+
+```shell
+$ git checkout -- CONTRIBUTING.md
+```
+
+
 
