@@ -536,5 +536,71 @@ $ git reset HEAD CONTRIBUTING.md
 $ git checkout -- CONTRIBUTING.md
 ```
 
+### 5. 远程仓库的使用
 
+#### 5.1 列出远程仓库`git remote -v`
+
+```shell
+$ git remote -v
+bakkdoor https://github.com/bakkdoor/grit (fetch)
+bakkdoor https://github.com/bakkdoor/grit (push)
+cho45 https://github.com/cho45/grit (fetch)
+cho45 https://github.com/cho45/grit (push)
+defunkt https://github.com/defunkt/grit (fetch)
+defunkt https://github.com/defunkt/grit (push)
+koke git://github.com/koke/grit.git (fetch)
+koke git://github.com/koke/grit.git (push)
+origin git@github.com:mojombo/grit.git (fetch)
+origin git@github.com:mojombo/grit.git (push)
+```
+
+该命令会列出项目中所有的远程仓库。每一行对应仓库的的简写和`URL`。
+
+#### 5.2 添加远程仓库`git remote add  <short-name> <url>`
+
+```shell
+$ git remote add pb https://github.com/paulboone/ticgit
+```
+
+该命令将`URL`为`https://github.com/paulboone/ticgit`的远程仓库添加到本地，并设置简写名称为`pb`。
+
+#### 5.3 从远程仓库中抓取与拉取`git fetch <remote-name>`
+
+```shell
+$ git fetch pb
+```
+
+这条命令抓取远程仓库到本地，而不是抓取某个远程仓库的某个分支。
+
+当然也可以将特定分支的更新拉取到本地
+
+```shell
+$ git fetch pb master
+```
+
+#### 5.4 推送到远程仓库`git push <remote-name> <branch-name>`
+
+```shell
+$ git push origin master
+```
+
+该命令是将本地`master`分支推送到`origin`对应的远程仓库。
+
+#### 5.5 查看远程仓库`git remote show <remote-name>`
+
+```shell
+$ git remote show origin
+```
+
+#### 5.6 远程仓库的重命名`git remote rename <old-name> <new-name>`
+
+```shell
+$ git remote rename pb paul
+```
+
+#### 5.7 远程仓库的移除
+
+```shell
+$ git remote rm paul
+```
 
