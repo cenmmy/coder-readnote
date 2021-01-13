@@ -604,3 +604,77 @@ $ git remote rename pb paul
 $ git remote rm paul
 ```
 
+### 6. 打标签
+
+`git`可以给历史中的某一个提交打上标签，表示该提交作为一个版本节点，人们通常使用标签来标记发布节点。
+
+#### 6.1 列出标签`git tag`
+
+```shell
+$ git tag
+```
+
+该命令以字幕顺序列出标签 。
+
+```shell
+$ git tag -l 'v1.8.5*'
+```
+
+`-l`参数对标签进行过滤。
+
+#### 6.2 创建标签`git tag -a <tag-name> -m <tag-msg>`
+
+标签分为两种：轻量标签和附注标签。
+
+轻量标签是一个特定提交的引用，而附注标签是`Git`仓库中一个完整的对象。通常建议创建附注标签。
+
+```shell
+$ git tag -a v1.0 -m "my version 1.0"
+```
+
+该命令创建一个附注标签
+
+```shell
+$ git tag v1.0
+```
+
+该命令创建一个轻量标签
+
+#### 6.3 后期打标签`git tag -a <tag-name> <历史提交的校验和>`
+
+```shell
+$ git log --pretty=oneline
+15027957951b64cf874c3557a0f3547bd83b3ff6 Merge branch 'experiment'
+a6b4c97498bd301d84096da251c98a07c7723e65 beginning write support
+0d52aaab4479697da7686c15f77a3d64d9165190 one more thing
+6d52a271eda8725415634dd79daabbc4d9b6008e Merge branch 'experiment'
+0b7434d86859cc7b8c3d5e1dddfed66ff742fcbc added a commit function
+4682c3261057305bdd616e23b64b0857d832627b added a todo file
+166ae0c4d3f420721acbb115cc33848dfcc2121a started write support
+9fceb02d0ae598e95dc970b74767f19372d61af8 updated rakefile
+964f16d36dfccde844893cac5b347e7b3d44abbc commit the todo
+8a5cbc430f1a9c3d00faaeffd07798508422908a updated readme
+$ git tag -a v1.0 9fceb02
+```
+
+#### 6.4 推送标签`git push <remote> <tagname>`
+
+```shell
+git push origin v1.0
+```
+
+默认情况下，`git push`命令不会将标签传送到远程仓库上，在创建完标签之后必须显式将标签推送到服务器上。
+
+```shell
+git push origin --tags
+```
+
+该命令会将不在远程仓库的标签全部推送到远程仓库上。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+#### 6.5 检出标签
+
+```shell
+$ git checkout -b version1 v1.0
+```
+
+创建一个新的分支，该分支上的内容与标签v1.0的内容相同。
