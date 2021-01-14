@@ -671,10 +671,17 @@ git push origin --tags
 
 该命令会将不在远程仓库的标签全部推送到远程仓库上。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 
-#### 6.5 检出标签
+#### 6.5 检出标签`git checkout -b <branch-name> <tag-name>`
 
 ```shell
 $ git checkout -b version1 v1.0
 ```
 
 创建一个新的分支，该分支上的内容与标签v1.0的内容相同。
+
+#### 6.6 显示标签详细信息`git show <tag-name>`
+
+```shell
+$ git show v1.0
+```
+
