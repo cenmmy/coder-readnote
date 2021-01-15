@@ -1,5 +1,7 @@
 # Git分支
 
+> Note: 在markdown中使用windows下的路径分割符表示图片路径在`github`网站中不能显示图片。
+
 ### 1. 分支简介
 
 `Git`保存的不是文件的变化或者文件的差异，而是一系列不同时刻的文件快照。
@@ -41,7 +43,7 @@ $ git cat-file -p 58c9
 
 
 
-![](.\images\git-object-blob.jpg)
+![](./images/git-object-blob.jpg)
 
 
 
@@ -74,7 +76,7 @@ $ git cat-file -p 4caaa1
 
 
 
-![](.\images\git-object-tree.jpg)
+![](./images/git-object-tree.jpg)
 
 
 
@@ -94,7 +96,7 @@ committer lzane 李泽帆  1573302343 +0800
 
 
 
-![](.\images\git-object-commit.png)
+![](./images/git-object-commit.png)
 
 
 
@@ -112,7 +114,7 @@ $ cat .git/refs/heads/master
 
 
 
-![](.\images\git-branch.png)
+![](./images/git-branch.png)
 
 
 
@@ -120,7 +122,7 @@ $ cat .git/refs/heads/master
 
 其实`Git`中还有一个对象那就是`tag`类型的对象，其对应`Git`中的附注标签。
 
-![](.\images\git中的三个区域.jpg)
+![](./images/git中的三个区域.jpg)
 
 
 
