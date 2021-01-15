@@ -39,6 +39,8 @@ $ git cat-file -p 58c9
 
 此时我们的`Git`仓库是这样子的：
 
+
+
 ![](.\images\git-object-blob.jpg)
 
 
@@ -70,6 +72,8 @@ $ git cat-file -p 4caaa1
 
 此时的`Git`仓库是这样的：
 
+
+
 ![](.\images\git-object-tree.jpg)
 
 
@@ -88,6 +92,8 @@ committer lzane 李泽帆  1573302343 +0800
 
 此时的`Git仓库是这样的：`
 
+
+
 ![](.\images\git-object-commit.png)
 
 
@@ -103,6 +109,8 @@ $ cat .git/refs/heads/master
 ```
 
 此时会发现`master`分支中存储的信息就是上一次提交的`commit`对象的`SHA1`值。在`Git`仓库中，`HEAD`、分支和普通的`tag`可以简单理解为一个指针，指向对应的`commit`的`SHA1`值。
+
+
 
 ![](.\images\git-branch.png)
 
