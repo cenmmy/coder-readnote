@@ -291,3 +291,51 @@ Changes to be committed:
 	modified: index.html
 ```
 
+### 3. 分支管理
+
+#### 3.1 查看分支列表`git branch`
+
+```shell
+$ git branch
+  iss53
+* master
+  testing
+```
+
+注意使用`*`号标注的分支是现在检出的分支，即`HEAD`指针指向的分支。
+
+#### 3.2 查看每个分支最新一次的提交`git branch -v`
+
+```shell
+$ git branch -v
+  iss53 93b412c fix javascript issue
+* master 7a98805 Merge branch 'iss53'
+  testing 782fd34 add scott to the author list in the readmes
+```
+
+#### 3.3 查看哪些分支已经合并到当前分支`git branch --merged`
+
+```shell
+$ git branch --merged
+  iss53
+* master
+```
+
+因为我们之前合并了iss53分支，因此可以看到该分支在列表中，通常输出中没有星号的分支可以使用`git branch -d`删除掉。
+
+#### 3.4 查看哪些分支还没有合并当前分支`git branch --no-merged`
+
+```shell
+$ git branch --no-merged
+  testing
+```
+
+因为我们还没有合并过`testing`分支，因此该分支显示在列表中，这时如果我们尝试使用`git branch -d`删除分支，则会失败。
+
+```shell
+$ git branch -d testing
+error: The branch 'testing' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D testing'.
+```
+
+如果你想要强制删除，使用`git branch -D`
