@@ -339,3 +339,152 @@ If you are sure you want to delete it, run 'git branch -D testing'.
 ```
 
 如果你想要强制删除，使用`git branch -D`
+
+### 4. 远程分支
+
+远程引用是对远程仓库的引用，包括分支、标签等等。可以通过`git ls-remote(remote)`来显式地获取远程引用地完整列表。还可以通过`git remote show (remote)获取远程分支地更多信息。`
+
+远程跟踪分支是对远程分支状态的引用，它是你不能移动的本地引用。当做任何的网络通信操作时，它们会自动移动。
+
+远程跟踪分支的命名形式为`(remote)/(branch)`
+
+![](./images/git远程分支图1.png)
+
+远程仓库：
+
+![](./images/git远程分支图2.png)
+
+克隆到本地仓库：
+
+![](./images/git远程分支图3.png)
+
+团队中其他人向远程的master分支提交了更新：
+
+![](./images/git远程分支图4.png)
+
+本地向master分支提交了更新：
+
+![](./images/git远程分支图5.png)
+
+合并远程分支`git fetch origin`
+
+![](./images/git远程分支图6.png)
+
+#### 4.1 向远程分支推送`git push`
+
+```shell
+$ git push origin serverfix
+```
+
+上面这条命令是将本地的`serverfix`分支推送到`origin`的`serverfix`分支。
+
+```shell
+$ git push origin serverfix:serverfix
+```
+
+这条命令与上面的命令作用相同。
+
+```shell
+$ git push origin serverfix:awesomebranch
+Counting objects: 24, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (15/15), done.
+Writing objects: 100% (24/24), 1.91 KiB | 0 bytes/s, done.
+Total 24 (delta 2), reused 0 (delta 0)
+To https://github.com/schacon/simplegit
+	* [new branch] serverfix -> awesomebranch
+```
+
+上面的命令可以将本地`serverfix`分支推送到远程的`awesomebranch`分支。
+
+当远程仓库没有指定的分支时，会在远程仓库中创建该分支。
+
+```shell
+$ git fetch origin
+remote: Counting objects: 7, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From https://github.com/schacon/simplegit
+	* [new branch] serverfix -> origin/serverfix
+```
+
+其他人从远程分支抓取数据时会在本地创建一个远程分支`origin/serverfix`。
+
+该命令只是在本地生成一个不可修改的`origin/serverfix`指针指向拷贝的分支。
+
+如果想在该分支的基础上操作，可以执行下面的命令：
+
+```shell
+$ git checkout -b serverfix origin/serverfix
+Branch serverfix set up to track remote branch serverfix from origin.
+Switched to a new branch 'serverfix'
+```
+
+该命令会创建一个本地分支`serverfix`，并且起点位于`origin/serverfix`。
+
+#### 4.2 跟踪分支
+
+从一个远程跟踪分支检出一个本地分支会自动创建一个叫做 “跟踪分支”（有时候也叫做 “上游分支”）。跟踪分支是与远程分支有直接关系的本地分支。如果在一个跟踪分支上输入 git pull，Git能自动地识别去哪个服务器上抓取、合并到哪个分支。
+
+当克隆一个仓库时，它通常会自动创建一个跟踪`origin/master`的`master`分支。你可以使用我们在上一节使用的`git checkout -b <bramch> <remotename>/<branch>`。因为这是一个非常常用的操作，所以GIt提供了一个`--track`快捷方式。
+
+```shell
+$ git checkout --track origin/serverfix
+Branch serverfix set up to track remote branch serverfix from origin.
+Switched to a new branch 'serverfix'
+```
+
+该命令会自动创建一个与远程分支名称相同的本地分支。
+
+```shell
+$ git checkout -b sf origin/serverfix
+Branch sf set up to track remote branch serverfix from origin.
+Switched to a new branch 'sf'
+```
+
+可以指定跟踪分支的名称。
+
+```shell
+$ git branch -u origin/serverfix
+Branch serverfix set up to track remote branch serverfix from origin.
+```
+
+设置已有的分支来跟踪远程分支
+
+```shell
+$ git branch -u origin/serverfix
+Branch serverfix set up to track remote branch serverfix from origin.
+```
+
+查看所有的跟踪分支：
+
+```shell
+$ git branch -vv
+$ git branch -vv
+	iss53 7e424c3 [origin/iss53: ahead 2] forgot the brackets
+	master 1ae2a45 [origin/master] deploying index fix
+	* serverfix f8674d9 [teamone/server-fix-good: ahead 3, behind 1] this
+should do it
+	testing 5ea463a trying something new
+```
+
+可以看到`iss53`分支正在跟踪的`origin/iss53`并且`ahead`是2，意味着本地还有两个提交没有推送到服务器上。
+
+拉取所有的远程分支
+
+```shell
+$ git fetch -all
+```
+
+#### 4.3 删除远程分支
+
+删除远程分支
+
+```shell
+$ git push origin --delete serverfix
+To https://github.com/schacon/simplegit
+ - [deleted] serverfix
+```
+
+删除git服务器上的`serverfix`分支。
