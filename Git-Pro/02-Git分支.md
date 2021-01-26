@@ -488,3 +488,26 @@ To https://github.com/schacon/simplegit
 ```
 
 删除git服务器上的`serverfix`分支。
+
+### 5. 变基
+
+![](./images/变基演示图1.png)
+
+当前提交记录
+
+![](./images/变基演示图2.png)
+
+合并操作
+
+![](./images/变基演示图3.png)
+
+变基操作 ，变基操作的基本原理是首先找到两个分支的共同祖先`C2`，然后对比当前分支相对于该祖先的历次提交，提取相应的修改为临时文件，然后将当前分支指向目标基底`C3`，最后将临时文件的修改依序应用。
+
+```shell
+$ git checkout experiment
+$ git rebase master
+$ git checkout master
+$ git merge experiment
+```
+
+![](./images/变基演示图4.png)
