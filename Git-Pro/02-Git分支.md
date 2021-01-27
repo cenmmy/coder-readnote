@@ -510,4 +510,28 @@ $ git checkout master
 $ git merge experiment
 ```
 
+`git rebase branch`的目的是将当前分支变基到指定的分支上，我们还可以指定要操作的分支`git rebase [basebranch] [topicbranch]`。
+
+```shell
+$ git rebase master experiment
+```
+
+
+
 ![](./images/变基演示图4.png)
+
+### 6. 更有趣的变基的例子 
+
+![](./images/变基演示图5.png)
+
+现在的提交记录形如上面的图片所展示的那样，而我们的需求是将`client`上的分支合并到`master`分支上，而不将`server`分支的工作合并，这时我们将使用下面的这条命令
+
+```shell
+$ git rebase --onto master server client
+```
+
+上面命令的意思是取出`client`分支，找出处于`client`分支与`server`分支共同祖先之后修改，然后将他们在`master`分支上重演一遍。
+
+![](./images/变基演示图6.png)
+
+在进行变基的时候，需要注意的是**不要对在你的仓库外有副本的分支执行变基**。
